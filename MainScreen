@@ -1,0 +1,40 @@
+#include <pebble.h>
+
+#define NUM_VALUES 10
+
+int input_array[] = { 5, 7, 2, 6, 4, 1, 9, 0, 3, 8 };
+
+void swap(int index, int new_index) {  
+  int temp = input_array[index];
+  input_array[index] = input_array[new_index];
+  input_array[new_index] = temp;
+}
+
+void selection_sort(void) {  
+  for(int i = 0; i < NUM_VALUES; i++) {    
+    int min_index = i;
+    for(int j = i + 1; j < NUM_VALUES; j++) {      
+      if(input_array[j] < input_array[min_index]) {        
+        min_index = j;
+      }
+    }
+    if(min_index != i) {
+      swap(i, min_index);
+    }
+  }
+}
+
+void print_array(void) {  
+  for(int i = 0; i < NUM_VALUES; i++) {
+    printf("Element %d = %d", i, input_array[i]);
+  }
+  printf(" ");
+}
+
+int main(void) {  
+  print_array();
+  selection_sort();
+  print_array();
+  app_event_loop();
+  return 0;
+}
